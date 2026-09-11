@@ -483,7 +483,7 @@
     <p class="lede">We're throwing the doors open early — come as a listener, a contributor, or just the curious type. All are welcome, so pop your details in below and you'll be one of the first through the door.</p>
     <p class="event">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.1 7-11.5a7 7 0 1 0-14 0C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-      We'll be <span class="hl-blue">down in the basement, Fridays from 4:30pm</span> — see you then!
+      We'll be <span class="hl-blue">down in the basement, Fridays from 4:30pm onwards</span> — see you then!
     </p>
     <button type="button" class="counter" id="counterBtn">
       <span class="dot" aria-hidden="true"></span>
@@ -626,7 +626,7 @@
   function showConfirm(name, rank){
     var firstName = (name || '').trim().split(/\s+/)[0];
     confirmHeadline.textContent = firstName ? ('You\'re in, ' + firstName + '!') : 'You\'re on the map!';
-    confirmBody.innerHTML = "You're officially signed up for the Polaris beta. We'll be <span class=\"hl-blue\">down in the basement, Fridays from 4:30pm</span> — see you then! Keep an eye on your inbox and Slack for everything else you need.";
+    confirmBody.innerHTML = "You're officially signed up for the Polaris beta. We'll be <span class=\"hl-blue\">down in the basement, Fridays from 4:30pm onwards</span> — see you then! Keep an eye on your inbox and Slack for everything else you need.";
     if (rank){ confirmRank.textContent = '✦ Signup #' + rank + ' — confirmed'; }
     card.classList.add('showing-confirm');
   }
