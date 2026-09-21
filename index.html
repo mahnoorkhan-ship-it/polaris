@@ -182,11 +182,7 @@
     font-size: 12.5px;
     letter-spacing: 0.01em;
     color: var(--text-muted);
-    cursor: pointer;
-    transition: transform .12s ease, border-color .15s ease;
   }
-  .counter:hover{ transform: translateY(-1px); border-color: var(--blue); }
-  .counter:active{ transform: translateY(0); }
   .counter strong{
     font-family: var(--font-headline);
     font-variant-numeric: tabular-nums;
@@ -199,12 +195,6 @@
     background: var(--green);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 22%, transparent);
     flex: none;
-  }
-  .counter .see{
-    color: var(--blue);
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 2px;
   }
 
   main{ position: relative; z-index: 1; }
@@ -373,96 +363,6 @@
     color: var(--text-muted-dim);
   }
 
-  /* guest list modal */
-  .modal-backdrop{
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: color-mix(in srgb, var(--text) 45%, transparent);
-    z-index: 10;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 60px 20px;
-  }
-  .modal-backdrop.open{ display: flex; }
-  .modal{
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    max-width: 440px;
-    width: 100%;
-    max-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-  }
-  .modal-head{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 20px;
-    border-bottom: 1px solid var(--border);
-  }
-  .modal-head h3{
-    font-family: var(--font-headline);
-    font-weight: 800;
-    font-size: 18px;
-    margin: 0;
-  }
-  .modal-close{
-    border: none;
-    background: var(--bg-tint);
-    color: var(--text-muted);
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 1;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .modal-close:hover{ background: var(--border); }
-  .modal-body{
-    overflow-y: auto;
-    padding: 8px 12px;
-  }
-  .guest-row{
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    padding: 9px 8px;
-    border-radius: 10px;
-  }
-  .guest-row:hover{ background: var(--bg-tint); }
-  .avatar{
-    flex: none;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-system);
-    font-size: 12.5px;
-    font-weight: 700;
-    color: var(--on-color);
-  }
-  .guest-name{
-    font-family: var(--font-human);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .guest-role{
-    font-family: var(--font-system);
-    font-size: 11.5px;
-    color: var(--text-muted-dim);
-    margin-top: 1px;
-  }
-  .guest-empty{
-    padding: 30px 16px;
-    text-align: center;
-    color: var(--text-muted-dim);
-    font-size: 14px;
-  }
-
   @media (max-width: 480px){
     .card{ padding: 22px; border-radius: 16px; }
   }
@@ -483,14 +383,13 @@
     <p class="lede">We're throwing the doors open early — come as a listener, a contributor, or just the curious type. All are welcome, so pop your details in below and you'll be one of the first through the door.</p>
     <p class="event">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.1 7-11.5a7 7 0 1 0-14 0C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-      We'll be <span class="hl-blue">down in the basement, Fridays from 4:30pm onwards</span> — see you then!
+      We'll be <span class="hl-blue">down in the basement, Tuesday from 4 to 5pm</span> — see you then!
     </p>
-    <button type="button" class="counter" id="counterBtn">
+    <div class="counter" id="counterBox">
       <span class="dot" aria-hidden="true"></span>
       <strong id="countNum">–</strong>
       <span id="countLabel">PEOPLE ALREADY IN</span>
-      <span class="see">— see who</span>
-    </button>
+    </div>
   </header>
 
   <main>
@@ -533,19 +432,6 @@
   </main>
 </div>
 
-<div class="modal-backdrop" id="modalBackdrop">
-  <div class="modal">
-    <div class="modal-head">
-      <h3>Who's in so far</h3>
-      <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
-    </div>
-    <div class="modal-body" id="guestList">
-      <div class="guest-empty">Loading...</div>
-    </div>
-  </div>
-</div>
-
-
 <script>
 (function(){
   // ---- Set this after deploying the Google Apps Script web app ----
@@ -560,73 +446,16 @@
   var confirmHeadline = document.getElementById('confirmHeadline');
   var confirmBody = document.getElementById('confirmBody');
   var confirmRank = document.getElementById('confirmRank');
-  var counterBtn = document.getElementById('counterBtn');
-  var modalBackdrop = document.getElementById('modalBackdrop');
-  var modalClose = document.getElementById('modalClose');
-  var guestList = document.getElementById('guestList');
-
-  var AVATAR_COLORS = ['#237fde', '#ffd400', '#ff5a5f'];
-  function avatarStyle(i){
-    var c = AVATAR_COLORS[i % AVATAR_COLORS.length];
-    var textColor = c === '#ffd400' ? '#0a0f1e' : '#fafbfd';
-    return 'background:' + c + ';color:' + textColor + ';';
-  }
-  function initials(name){
-    var parts = (name || '').trim().split(/\s+/).filter(Boolean);
-    if (!parts.length) return '?';
-    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-  }
 
   function setCount(n){
     countNum.textContent = n;
     countLabel.textContent = n === 1 ? 'PERSON ALREADY IN' : 'PEOPLE ALREADY IN';
   }
 
-  function renderGuestList(signups){
-    if (!signups || !signups.length){
-      guestList.innerHTML = '<div class="guest-empty">No one yet — be the first!</div>';
-      return;
-    }
-    var rows = signups.map(function(s, i){
-      var name = s.name || 'Someone';
-      var role = s.role || '';
-      return '<div class="guest-row">' +
-        '<div class="avatar" style="' + avatarStyle(i) + '">' + initials(name) + '</div>' +
-        '<div class="guest-info">' +
-          '<div class="guest-name">' + escapeHtml(name) + '</div>' +
-          (role ? '<div class="guest-role">' + escapeHtml(role) + '</div>' : '') +
-        '</div>' +
-        '</div>';
-    });
-    guestList.innerHTML = rows.join('');
-  }
-
-  function escapeHtml(s){
-    return String(s).replace(/[&<>"']/g, function(c){
-      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
-    });
-  }
-
-  function openModal(){
-    modalBackdrop.classList.add('open');
-    document.addEventListener('keydown', onEsc);
-  }
-  function closeModal(){
-    modalBackdrop.classList.remove('open');
-    document.removeEventListener('keydown', onEsc);
-  }
-  function onEsc(e){ if (e.key === 'Escape') closeModal(); }
-  counterBtn.addEventListener('click', openModal);
-  modalClose.addEventListener('click', closeModal);
-  modalBackdrop.addEventListener('click', function(e){
-    if (e.target === modalBackdrop) closeModal();
-  });
-
   function showConfirm(name, rank){
     var firstName = (name || '').trim().split(/\s+/)[0];
     confirmHeadline.textContent = firstName ? ('You\'re in, ' + firstName + '!') : 'You\'re on the map!';
-    confirmBody.innerHTML = "You're officially signed up for the Polaris beta. We'll be <span class=\"hl-blue\">down in the basement, Fridays from 4:30pm onwards</span> — see you then! Keep an eye on your inbox and Slack for everything else you need.";
+    confirmBody.innerHTML = "You're officially signed up for the Polaris beta. We'll be <span class=\"hl-blue\">down in the basement, Tuesday from 4 to 5pm</span> — see you then! Keep an eye on your inbox and Slack for everything else you need.";
     if (rank){ confirmRank.textContent = '✦ Signup #' + rank + ' — confirmed'; }
     card.classList.add('showing-confirm');
   }
@@ -649,18 +478,15 @@
   function refreshList(){
     if (APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0){
       countLabel.textContent = 'NOT CONNECTED YET';
-      guestList.innerHTML = '<div class="guest-empty">The signup backend isn\'t connected yet.</div>';
       return;
     }
     fetch(APPS_SCRIPT_URL, { method: 'GET' })
       .then(function(r){ return r.json(); })
       .then(function(data){
         setCount(data.count || 0);
-        renderGuestList(data.signups || []);
       })
       .catch(function(){
         countLabel.textContent = 'LIVE COUNT UNAVAILABLE';
-        guestList.innerHTML = '<div class="guest-empty">The guest list isn\'t available right now.</div>';
       });
   }
 
