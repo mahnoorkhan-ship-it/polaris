@@ -46,9 +46,9 @@
     -webkit-font-smoothing: antialiased;
   }
   .wrap{
-    max-width: 620px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 48px 20px 64px;
+    padding: 48px 32px 64px;
     position: relative;
   }
 
@@ -102,8 +102,8 @@
     margin-bottom: 28px;
   }
   .brand-mark{
-    height: 30px;
-    width: 141px;
+    height: 36px;
+    width: 169px;
     background-color: var(--text);
     -webkit-mask-image: var(--logo-lockup);
     mask-image: var(--logo-lockup);
@@ -117,7 +117,7 @@
   h1{
     font-family: var(--font-headline);
     font-weight: 800;
-    font-size: clamp(28px, 5.2vw, 36px);
+    font-size: clamp(34px, 4.6vw, 48px);
     line-height: 1.12;
     letter-spacing: -0.015em;
     margin: 0 0 14px;
@@ -139,7 +139,7 @@
     border-radius: 3px;
   }
   .lede{
-    font-size: 15.5px;
+    font-size: 18px;
     line-height: 1.55;
     color: var(--text-muted);
     margin: 0 0 16px;
@@ -152,7 +152,7 @@
   }
   .resources a{
     font-family: var(--font-system);
-    font-size: 12.5px;
+    font-size: 14px;
     color: var(--blue);
     text-decoration: none;
     background: var(--blue-bg);
@@ -168,13 +168,13 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 20px;
-    padding: 30px;
+    padding: 56px 60px;
     box-shadow: var(--shadow);
   }
 
   .section-label{
     font-family: var(--font-system);
-    font-size: 11.5px;
+    font-size: 13px;
     letter-spacing: 0.06em;
     color: var(--text-muted-dim);
     text-transform: uppercase;
@@ -183,16 +183,22 @@
   .section-title{
     font-family: var(--font-headline);
     font-weight: 800;
-    font-size: 19px;
+    font-size: 25px;
     margin: 0 0 18px;
   }
   .section + .section{ margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--border); }
 
-  .field{ margin-bottom: 18px; }
+  .field{ margin-bottom: 22px; }
+  .field-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .field-row .field{ margin-bottom: 0; }
   .field label{
     display: block;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 16.5px;
     margin-bottom: 7px;
   }
   .field .optional{ font-weight: 400; color: var(--text-muted-dim); }
@@ -203,9 +209,9 @@
     border: none;
     background: var(--bg-tint);
     border-radius: 12px;
-    padding: 12px 14px;
+    padding: 15px 17px;
     font-family: var(--font-human);
-    font-size: 15px;
+    font-size: 17px;
     color: var(--text);
     box-shadow: 0 0 0 1px transparent inset;
     transition: box-shadow .12s ease;
@@ -215,7 +221,7 @@
     outline: none;
     box-shadow: 0 0 0 2px var(--blue) inset;
   }
-  .field textarea{ min-height: 84px; resize: vertical; font-family: var(--font-human); }
+  .field textarea{ min-height: 100px; resize: vertical; font-family: var(--font-human); }
 
   .scale{
     display: flex;
@@ -223,16 +229,16 @@
     flex-wrap: wrap;
   }
   .scale label{
-    flex: 1 1 0;
-    min-width: 52px;
+    flex: 1 1 auto;
+    min-width: 100px;
     text-align: center;
     cursor: pointer;
     background: var(--bg-tint);
     border-radius: 12px;
-    padding: 12px 6px;
-    font-family: var(--font-headline);
+    padding: 15px 10px;
+    font-family: var(--font-human);
     font-weight: 700;
-    font-size: 16px;
+    font-size: 15.5px;
     color: var(--text-muted);
     box-shadow: 0 0 0 1px transparent inset;
     transition: box-shadow .12s ease, color .12s ease, background .12s ease;
@@ -246,22 +252,14 @@
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--yellow) 70%, transparent) inset;
     animation: choicePop .3s cubic-bezier(.3,1.6,.4,1);
   }
-  .scale-caption{
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-system);
-    font-size: 11px;
-    color: var(--text-muted-dim);
-    margin-top: 6px;
-  }
 
   .radio-row{ display: flex; gap: 8px; flex-wrap: wrap; }
   .radio-row label{
     cursor: pointer;
     background: var(--bg-tint);
     border-radius: 999px;
-    padding: 9px 16px;
-    font-size: 14px;
+    padding: 12px 20px;
+    font-size: 16.5px;
     font-weight: 600;
     color: var(--text-muted);
     box-shadow: 0 0 0 1px transparent inset;
@@ -288,8 +286,8 @@
     color: var(--button-text);
     font-family: var(--font-human);
     font-weight: 700;
-    font-size: 15.5px;
-    padding: 14px;
+    font-size: 18px;
+    padding: 17px;
     border-radius: 12px;
     cursor: pointer;
     margin-top: 6px;
@@ -308,7 +306,7 @@
   }
 
   .fineprint{
-    font-size: 12px;
+    font-size: 13.5px;
     color: var(--text-muted-dim);
     text-align: center;
     margin-top: 14px;
@@ -343,12 +341,12 @@
   .confirm h2{
     font-family: var(--font-headline);
     font-weight: 800;
-    font-size: 22px;
+    font-size: 28px;
     margin: 0 0 8px;
   }
   .confirm p{
     color: var(--text-muted);
-    font-size: 14.5px;
+    font-size: 17px;
     line-height: 1.55;
     max-width: 420px;
     margin: 0 auto;
@@ -359,14 +357,18 @@
   footer{
     text-align: center;
     font-family: var(--font-system);
-    font-size: 11.5px;
+    font-size: 13px;
     color: var(--text-muted-dim);
     margin-top: 26px;
   }
 
+  @media (max-width: 600px){
+    .field-row{ grid-template-columns: 1fr; gap: 18px; }
+  }
+
   @media (max-width: 480px){
     .card{ padding: 22px; border-radius: 16px; }
-    .scale label{ min-width: 40px; padding: 10px 4px; }
+    .scale label{ min-width: 42%; font-size: 14px; padding: 12px 8px; }
   }
 </style>
 </head>
@@ -396,13 +398,15 @@
 
           <div class="section">
             <p class="section-label">About you</p>
-            <div class="field">
-              <label for="name">Name <span class="optional">(optional)</span></label>
-              <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name" />
-            </div>
-            <div class="field">
-              <label for="email">Work email <span class="optional">(optional)</span></label>
-              <input type="email" id="email" name="email" placeholder="you@datumlabs.io" autocomplete="email" />
+            <div class="field-row">
+              <div class="field">
+                <label for="name">Name <span class="optional">(optional)</span></label>
+                <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="email">Work email <span class="optional">(optional)</span></label>
+                <input type="email" id="email" name="email" placeholder="you@datumlabs.io" autocomplete="email" />
+              </div>
             </div>
           </div>
 
@@ -412,13 +416,12 @@
             <div class="field">
               <label>What's your first impression?</label>
               <div class="scale" id="polarisScale">
-                <input type="radio" name="polarisRating" id="pol1" value="1"><label for="pol1">1</label>
-                <input type="radio" name="polarisRating" id="pol2" value="2"><label for="pol2">2</label>
-                <input type="radio" name="polarisRating" id="pol3" value="3"><label for="pol3">3</label>
-                <input type="radio" name="polarisRating" id="pol4" value="4"><label for="pol4">4</label>
-                <input type="radio" name="polarisRating" id="pol5" value="5"><label for="pol5">5</label>
+                <input type="radio" name="polarisRating" id="pol1" value="1"><label for="pol1">Not for me</label>
+                <input type="radio" name="polarisRating" id="pol2" value="2"><label for="pol2">Not sure</label>
+                <input type="radio" name="polarisRating" id="pol3" value="3"><label for="pol3">Interesting</label>
+                <input type="radio" name="polarisRating" id="pol4" value="4"><label for="pol4">Promising</label>
+                <input type="radio" name="polarisRating" id="pol5" value="5"><label for="pol5">Really excited</label>
               </div>
-              <div class="scale-caption"><span>Not for me</span><span>Really promising</span></div>
             </div>
             <div class="field">
               <label>Would you see yourself using Polaris?</label>
@@ -440,13 +443,12 @@
             <div class="field">
               <label>How clear and useful was the session?</label>
               <div class="scale" id="policeScale">
-                <input type="radio" name="policeRating" id="pr1" value="1"><label for="pr1">1</label>
-                <input type="radio" name="policeRating" id="pr2" value="2"><label for="pr2">2</label>
-                <input type="radio" name="policeRating" id="pr3" value="3"><label for="pr3">3</label>
-                <input type="radio" name="policeRating" id="pr4" value="4"><label for="pr4">4</label>
-                <input type="radio" name="policeRating" id="pr5" value="5"><label for="pr5">5</label>
+                <input type="radio" name="policeRating" id="pr1" value="1"><label for="pr1">Confusing</label>
+                <input type="radio" name="policeRating" id="pr2" value="2"><label for="pr2">Needs work</label>
+                <input type="radio" name="policeRating" id="pr3" value="3"><label for="pr3">OK</label>
+                <input type="radio" name="policeRating" id="pr4" value="4"><label for="pr4">Clear</label>
+                <input type="radio" name="policeRating" id="pr5" value="5"><label for="pr5">Excellent</label>
               </div>
-              <div class="scale-caption"><span>Not clear / not useful</span><span>Very clear &amp; useful</span></div>
             </div>
             <div class="field">
               <label for="policeComments">Anything unclear, or that you'd want covered differently? <span class="optional">(optional)</span></label>
